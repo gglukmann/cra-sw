@@ -20,10 +20,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and build
+    - name: Install and build
       run: |
-        npm install
-        npm run build
+        yarn --frozen-lockfile
+        yarn build
     - name: Copy public folder via ssh
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
       env:
