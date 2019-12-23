@@ -24,11 +24,10 @@ jobs:
       run: |
         yarn --frozen-lockfile
         yarn build
-    - name: Copy public folder via ssh
+    - name: Copy build to server via ssh
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
       env:
         FTP_SERVER: ${{ secrets.HOST }}
         FTP_USERNAME: ${{ secrets.USERNAME }}
         FTP_PASSWORD: ${{ secrets.PASSWORD }}
-        LOCAL_DIR: build
         REMOTE_DIR: htdocs/my-app
