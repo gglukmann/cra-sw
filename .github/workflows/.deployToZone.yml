@@ -22,7 +22,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install and build
       run: |
-        cd client
         npm install
         npm run build
     - name: Copy public folder via ssh
