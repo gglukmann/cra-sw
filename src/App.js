@@ -26,7 +26,7 @@ function App() {
         )}
         {isServiceWorkerUpdated && (
           <Alert
-            text="Service Worker is updated"
+            text="There is a new version available."
             type={SW_UPDATE}
             onClick={() =>
               serviceWorkerRegistration.waiting.postMessage('skipWaiting')
@@ -37,6 +37,7 @@ function App() {
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        Version 1.1
         <p>
           <button onClick={() => dispatch({ type: SW_INIT })}>Init</button>
           <br />

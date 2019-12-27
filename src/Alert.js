@@ -7,10 +7,12 @@ const Alert = ({ text, type, onClick }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch({ type });
-    }, 6000);
-    return () => clearTimeout(timer);
+    if (!onClick) {
+      const timer = setTimeout(() => {
+        dispatch({ type });
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
