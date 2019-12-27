@@ -19,8 +19,6 @@ function App() {
   );
 
   const updateServiceWorker = () => {
-    console.log(serviceWorkerRegistration);
-    console.log(serviceWorkerRegistration.waiting);
     const waitingServiceWorker = serviceWorkerRegistration.waiting;
 
     if (waitingServiceWorker) {
