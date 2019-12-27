@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { SW_INIT, SW_UPDATE } from './types';
 import Alert from './Alert';
@@ -7,7 +7,6 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const dispatch = useDispatch();
   const isServiceWorkerInitialized = useSelector(
     state => state.serviceWorkerInitialized,
   );
@@ -19,13 +18,13 @@ function App() {
   );
 
   const updateServiceWorker = () => {
-    const waitingServiceWorker = serviceWorkerRegistration.waiting;
+    const registrationWaiting = serviceWorkerRegistration.waiting;
 
-    if (waitingServiceWorker) {
-      waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
+    if (registrationWaiting) {
+      registrationWaiting.postMessage({ type: 'SKIP_WAITING' });
 
-      waitingServiceWorker.addEventListener('statechange', event => {
-        if (event.target.state === 'activated') {
+      registrationWaiting.addEventListener('statechange', e => {
+        if (e.target.state === 'activated') {
           window.location.reload();
         }
       });
@@ -36,7 +35,7 @@ function App() {
     <div className="App">
       <div className="App-alert">
         {isServiceWorkerInitialized && (
-          <Alert text="Service Worker is initialized" type={SW_INIT} />
+          <Alert text="Service Worker is initialized for the first time" type={SW_INIT} />
         )}
         {isServiceWorkerUpdated && (
           <Alert
@@ -49,18 +48,11 @@ function App() {
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        Version 1.5
         <p>
-          <button onClick={() => dispatch({ type: SW_INIT })}>Init</button>
-          <br />
           isServiceWorkerInitialized:{' '}
           {JSON.stringify(isServiceWorkerInitialized)}
         </p>
-        <p>
-          <button onClick={() => dispatch({ type: SW_UPDATE })}>Update</button>
-          <br />
-          isServiceWorkerUpdated: {JSON.stringify(isServiceWorkerUpdated)}
-        </p>
+        <p>isServiceWorkerUpdated: {JSON.stringify(isServiceWorkerUpdated)}</p>
       </header>
     </div>
   );
