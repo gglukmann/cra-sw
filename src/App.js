@@ -49,7 +49,7 @@ function App() {
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        Version 1.3
+        Version 1.4
         <p>
           <button onClick={() => dispatch({ type: SW_INIT })}>Init</button>
           <br />
