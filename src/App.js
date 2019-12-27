@@ -18,6 +18,20 @@ function App() {
     state => state.serviceWorkerRegistration,
   );
 
+  const updateServiceWorker = () => {
+    const waitingServiceWorker = serviceWorkerRegistration.waiting;
+
+    if (waitingServiceWorker) {
+      waitingServiceWorker.addEventListener('statechange', event => {
+        if (event.target.state === 'activated') {
+          window.location.reload();
+        }
+      });
+
+      waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
+    }
+  };
+
   return (
     <div className="App">
       <div className="App-alert">
@@ -28,10 +42,7 @@ function App() {
           <Alert
             text="There is a new version available."
             type={SW_UPDATE}
-            onClick={() =>
-              serviceWorkerRegistration.skipWaiting();
-              window.location.reload();
-            }
+            onClick={() => updateServiceWorker()}
           />
         )}
       </div>
