@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.App-alert {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+}
+
+.App-alert > * + * {
+  margin-top: 1rem;
+}

@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from './reducers';
-import { swInit } from './actions';
+import configureStore from './store';
+import { SW_INIT, SW_UPDATE } from './types';
 
-const store = createStore(rootReducer);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
@@ -22,6 +21,7 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register({
-  onSuccess: () => swInit(),
-  onUpdate: registration => console.log('onUpdate registration', registration),
+  onSuccess: () => store.dispatch({ type: SW_INIT }),
+  onUpdate: registration =>
+    store.dispatch({ type: SW_UPDATE, payload: registration }),
 });
