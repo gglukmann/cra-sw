@@ -14,8 +14,9 @@ function App() {
   const isServiceWorkerUpdated = useSelector(
     state => state.serviceWorkerUpdated,
   );
-
-  const handleClick = type => dispatch({ type });
+  const serviceWorkerRegistration = useSelector(
+    state => state.serviceWorkerRegistration,
+  );
 
   return (
     <div className="App">
@@ -24,32 +25,29 @@ function App() {
           <Alert text="Service Worker is initialized" type={SW_INIT} />
         )}
         {isServiceWorkerUpdated && (
-          <Alert text="Service Worker is updated" type={SW_UPDATE} />
+          <Alert
+            text="Service Worker is updated"
+            type={SW_UPDATE}
+            onClick={() =>
+              serviceWorkerRegistration.waiting.postMessage('skipWaiting')
+            }
+          />
         )}
       </div>
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <button onClick={() => handleClick(SW_INIT)}>Init</button>{' '}
+          <button onClick={() => dispatch({ type: SW_INIT })}>Init</button>
+          <br />
           isServiceWorkerInitialized:{' '}
           {JSON.stringify(isServiceWorkerInitialized)}
         </p>
         <p>
-          <button onClick={() => handleClick(SW_UPDATE)}>Update</button>{' '}
+          <button onClick={() => dispatch({ type: SW_UPDATE })}>Update</button>
+          <br />
           isServiceWorkerUpdated: {JSON.stringify(isServiceWorkerUpdated)}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import './Alert.css';
 
-const Alert = ({ text, type }) => {
+const Alert = ({ text, type, onClick }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,7 +13,11 @@ const Alert = ({ text, type }) => {
     return () => clearTimeout(timer);
   }, []);
 
-  return <div className="alert">{text}</div>;
+  return (
+    <div className="alert">
+      {text} {!!onClick && <button onClick={onClick}>Update</button>}
+    </div>
+  );
 };
 
 export default Alert;

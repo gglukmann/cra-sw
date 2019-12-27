@@ -1,9 +1,6 @@
 import { SW_INIT, SW_UPDATE } from './types';
 
 function rootReducer(state = {}, action) {
-  console.log(state);
-  console.log(action);
-
   switch (action.type) {
     case SW_INIT:
       return {
