@@ -29,7 +29,8 @@ function App() {
             text="There is a new version available."
             type={SW_UPDATE}
             onClick={() =>
-              serviceWorkerRegistration.waiting.postMessage('SKIP_WAITING')
+              serviceWorkerRegistration.skipWaiting();
+              window.location.reload();
             }
           />
         )}
