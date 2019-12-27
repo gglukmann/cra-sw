@@ -19,16 +19,18 @@ function App() {
   );
 
   const updateServiceWorker = () => {
+    console.log(serviceWorkerRegistration);
+    console.log(serviceWorkerRegistration.waiting);
     const waitingServiceWorker = serviceWorkerRegistration.waiting;
 
     if (waitingServiceWorker) {
+      waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
+
       waitingServiceWorker.addEventListener('statechange', event => {
         if (event.target.state === 'activated') {
           window.location.reload();
         }
       });
-
-      waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
     }
   };
 
@@ -49,7 +51,7 @@ function App() {
 
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        Version 1.4
+        Version 1.5
         <p>
           <button onClick={() => dispatch({ type: SW_INIT })}>Init</button>
           <br />
