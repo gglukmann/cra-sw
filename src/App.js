@@ -42,7 +42,7 @@ function App() {
             text="There is a new version available."
             buttonText="Update"
             type={SW_UPDATE}
-            onClick={() => updateServiceWorker()}
+            onClick={updateServiceWorker}
           />
         )}
       </div>
