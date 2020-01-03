@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import './Alert.css';
 
-const Alert = ({ text, type, onClick }) => {
+const Alert = ({ text, buttonText, type, onClick }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Alert = ({ text, type, onClick }) => {
 
   return (
     <div className="alert">
-      {text} {!!onClick && <button onClick={onClick}>Update</button>}
+      {text} {buttonText && <button onClick={onClick}>{buttonText}</button>}
     </div>
   );
 };

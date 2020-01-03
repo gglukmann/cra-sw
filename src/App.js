@@ -40,6 +40,7 @@ function App() {
         {isServiceWorkerUpdated && (
           <Alert
             text="There is a new version available."
+            buttonText="Update"
             type={SW_UPDATE}
             onClick={() => updateServiceWorker()}
           />
